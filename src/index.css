@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.editBox{
+  visibility: hidden;
+  padding-block: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.editBox.show{
+  visibility: visible;
+}
+.editBox > *{
+  min-width: 150px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #175a18;
+}
