@@ -5,6 +5,7 @@ import Task from "./components/Task";
 import Editbox from "./components/EditBox";
 
 function App() {
+  let [editBoxState, setEditBoxState] = useState({isVisible: false, id: undefined});
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -29,7 +30,8 @@ function App() {
   ]);
 
   const showEditBox = (id) => {
-    document.getElementById("editBox").classList.add("show");
+    //document.getElementById("editBox").classList.add("show");
+    setEditBoxState({isVisible: true, id: id});
   };
   
   const addTask = (newTask) => {
@@ -81,7 +83,7 @@ function App() {
     <div className="App">
       <div className="container">
         <div className="row">
-          <Editbox action={"Add Task"} text={"Add"} Func={addTask} />
+          <Editbox action={"Add Task"} text={"Add"} Func={addTask} isVisible={editBox.isVisible} id={editbox.id}/>
         </div>
         <div className="row">
           <div className="col-4">
