@@ -5,7 +5,7 @@ import Task from "./components/Task";
 import Editbox from "./components/EditBox";
 
 function App() {
-  let [editBoxState, setEditBoxState] = useState({isVisible: false, id: undefined});
+  let [editBoxState, setEditBoxState] = useState({isVisible: false, editId: undefined});
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -29,12 +29,26 @@ function App() {
     },
   ]);
 
-  const showEditBox = (id) => {
-    //document.getElementById("editBox").classList.add("show");
+  const showEditBox = (id,name) => {
     setEditBoxState({isVisible: true, id: id});
+    if(id) {
+      document.getElementById("editTextBox").value = name;
+      document.getElementById("addButton").innerText = "Edit";
+      Editbox.Func = {updateTask};
+    } 
+    else{
+      document.getElementById("editTextBox").value = "add new task";
+      document.getElementById("addButton").innerText = "Add";
+      Editbox.Func = {addTask};
+    }
   };
+
+  function hideEditBox(){
+    setEditBoxState({isVisible: false, id: undefined})
+  } 
   
-  const addTask = (newTask) => {
+  const addTask = () => {
+    console.log("add");
     var name = document.getElementById("editTextBox").value;
     var id = tasks.length + 1;
     var done = false;
@@ -53,21 +67,22 @@ function App() {
     setTasks(updatedTasks);
   };
   
-  const editTask = (id,name) => {
-    document.getElementById("editTextBox").value = name;
-    document.getElementById("addButton").innerText = "Edit";
-    Editbox.Func = {updateTask};
-    document.getElementById("editBox").classList.add("show");
-  };
+  // const editTask = (id,name) => {
+  //   document.getElementById("editTextBox").value = name;
+  //   document.getElementById("addButton").innerText = "Edit";
+  //   Editbox.Func = {updateTask};
+  //   document.getElementById("editBox").classList.add("show");
+  // };
   
-  const updateTask = (id) => {
-    // console.log("mej");
-    // var name = document.getElementById("editTextBox").value;
-    // const renamedTasks = tasks.map(task => {
-    //   if(task.id === id) task.name = name
-    //   return task
-    // })
-    // setTasks(renamedTasks);
+  const updateTask = (id,name) => {
+    console.log("update");
+    const renamedTasks = tasks.map(task => {
+      if(task.id === id) {
+        task.name = name
+        return task
+      }
+    })
+    setTasks(renamedTasks);
   };
 
   const searchTask = () => {
@@ -83,7 +98,7 @@ function App() {
     <div className="App">
       <div className="container">
         <div className="row">
-          <Editbox action={"Add Task"} text={"Add"} Func={addTask} isVisible={editBox.isVisible} task={tasks.find(t => t.id == editbox.id)}/>
+          <Editbox action={"Add Task"} text={"Add"} Func={addTask} hideEditBox={hideEditBox} isVisible={editBoxState.isVisible} task={tasks.find(t => t.id === Editbox.id)}/>
         </div>
         <div className="row">
           <div className="col-4">
@@ -98,7 +113,7 @@ function App() {
             <h4 className="title">In Progress Tasks</h4>
             <div className="tasks">
               {tasks.map((i, v) =>
-                !i.done && <Task key={i.id} name={i.name} done={i.done} deleteFunc={() => {removeTask(i.id)}} editFunc={() => {showEditBox(i.id)}} state={i.done ? true : false} checkFunc={() => {checkTask(i.id)}}/>
+                !i.done && <Task key={i.id} name={i.name} done={i.done} deleteFunc={() => {removeTask(i.id)}} editFunc={() => {showEditBox(i.id, i.name)}} state={i.done ? true : false} checkFunc={() => {checkTask(i.id)}}/>
               )}
             </div>
           </div>
@@ -106,7 +121,7 @@ function App() {
             <h4 className="title">Done Tasks</h4>
             <div className="tasks">
               {tasks.map((i, v) =>
-                i.done && <Task key={i.id} name={i.name} done={i.done} deleteFunc={() => {removeTask(i.id)}} editFunc={() => {editTask(i.id,i.name)}} state={i.done ? true : false} checkFunc={() => {checkTask(i.id)}} />
+                i.done && <Task key={i.id} name={i.name} done={i.done} deleteFunc={() => {removeTask(i.id)}} editFunc={() => {showEditBox(i.id,i.name)}} state={i.done ? true : false} checkFunc={() => {checkTask(i.id)}} />
               )}
             </div>
           </div>
