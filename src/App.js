@@ -83,7 +83,7 @@ function App() {
     <div className="App">
       <div className="container">
         <div className="row">
-          <Editbox action={"Add Task"} text={"Add"} Func={addTask} isVisible={editBox.isVisible} id={editbox.id}/>
+          <Editbox action={"Add Task"} text={"Add"} Func={addTask} isVisible={editBox.isVisible} task={tasks.find(t => t.id == editbox.id)}/>
         </div>
         <div className="row">
           <div className="col-4">
@@ -98,7 +98,7 @@ function App() {
             <h4 className="title">In Progress Tasks</h4>
             <div className="tasks">
               {tasks.map((i, v) =>
-                !i.done && <Task key={i.id} name={i.name} done={i.done} deleteFunc={() => {removeTask(i.id)}} editFunc={() => {editTask(i.id,i.name)}} state={i.done ? true : false} checkFunc={() => {checkTask(i.id)}}/>
+                !i.done && <Task key={i.id} name={i.name} done={i.done} deleteFunc={() => {removeTask(i.id)}} editFunc={() => {showEditBox(i.id)}} state={i.done ? true : false} checkFunc={() => {checkTask(i.id)}}/>
               )}
             </div>
           </div>
