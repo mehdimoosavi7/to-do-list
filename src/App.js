@@ -30,17 +30,17 @@ function App() {
   ]);
 
   const showEditBox = (id,name) => {
-    setEditBoxState({isVisible: true, id: id});
-    if(id) {
-      document.getElementById("editTextBox").value = name;
-      document.getElementById("addButton").innerText = "Edit";
-      Editbox.Func = {updateTask};
-    } 
-    else{
-      document.getElementById("editTextBox").value = "add new task";
-      document.getElementById("addButton").innerText = "Add";
-      Editbox.Func = {addTask};
-    }
+    setEditBoxState({isVisible: true, editId: id});
+    // if(id) {
+    //   Editbox.text = name;
+    //   Editbox.action = "Edit";
+    //   Editbox.Func = {updateTask};
+    // } 
+    // else{
+    //   Editbox.text = "add new task";
+    //   Editbox.action = "Add";
+    //   Editbox.Func = {addTask};
+    // }
   };
 
   function hideEditBox(){
@@ -48,7 +48,6 @@ function App() {
   } 
   
   const addTask = () => {
-    console.log("add");
     var name = document.getElementById("editTextBox").value;
     var id = tasks.length + 1;
     var done = false;
@@ -75,12 +74,11 @@ function App() {
   // };
   
   const updateTask = (id,name) => {
-    console.log("update");
     const renamedTasks = tasks.map(task => {
       if(task.id === id) {
         task.name = name
-        return task
       }
+      return task
     })
     setTasks(renamedTasks);
   };
@@ -98,7 +96,7 @@ function App() {
     <div className="App">
       <div className="container">
         <div className="row">
-          <Editbox action={"Add Task"} text={"Add"} Func={addTask} hideEditBox={hideEditBox} isVisible={editBoxState.isVisible} task={tasks.find(t => t.id === Editbox.id)}/>
+          <Editbox action={"Add Task"} text={"Add"} Func={tasks.find(t => t.id === editBoxState.editId) ? updateTask : addTask} hideEditBox={hideEditBox} isVisible={editBoxState.isVisible} task={tasks.find(t => t.id === editBoxState.editId)}/>
         </div>
         <div className="row">
           <div className="col-4">
