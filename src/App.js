@@ -52,6 +52,7 @@ function App() {
     var id = tasks.length + 1;
     var done = false;
     setTasks((arr) => [...arr, {id, name, done}]);
+    setEditBoxState({isVisible: false})
   };
   
   const removeTask = (id) => {
@@ -81,6 +82,7 @@ function App() {
       return task
     })
     setTasks(renamedTasks);
+    setEditBoxState({isVisible: false})
   };
 
   const searchTask = () => {
