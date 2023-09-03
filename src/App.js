@@ -1,3 +1,4 @@
+import React  from 'react';
 import "./App.css";
 import { useState } from "react";
 import Search from "./components/Search";
@@ -30,6 +31,8 @@ function App() {
     },
   ]);
   
+  const [value, setValue] = useState('');
+
   const showEditBox = (id,name) => {
     setEditBoxState({isVisible: true, editId: id});
   };
@@ -69,25 +72,19 @@ function App() {
     setEditBoxState({isVisible: false})
   };
 
-  const searchTask = () => {
-    var searchText = document.getElementById("searchText").value;
-    const filteredTasks = tasks.filter((task) => {
-      // task.name.match(searchText)
-      return Object.values(task).join('').toLowerCase().includes(searchText.toLowerCase())
-  })
-    setTasks(filteredTasks)
-  }
-
   return (
     <div className="App">
       <div className="container">
+        <div className='row'>
+          <h2 className='to-do-title'>To do list</h2>
+        </div>
         <div className="row">
           <Editbox action={"Add Task"} text={"Add"} Func={tasks.find(t => t.id === editBoxState.editId) ? updateTask : addTask} hideEditBox={hideEditBox} isVisible={editBoxState.isVisible} task={tasks.find(t => t.id === editBoxState.editId) ? tasks[editBoxState.editId-1] : ""}/>
         </div>
-        <div className="row">
+        <div className="row content">
           <div className="col-4">
-            <div>
-              <Search func={searchTask} />
+            <div className='sidebar'>
+              <Search value={value} func={(e) => setValue(e.target.value)} />
               <button className="add-btn" id="addButton" onClick={showEditBox}>
                 Add a new task
               </button>
@@ -96,7 +93,12 @@ function App() {
           <div className="col-4">
             <h4 className="title">In Progress Tasks</h4>
             <div className="tasks">
-              {tasks.map((i, v) =>
+              {tasks.filter(item => {
+                if(!value) return true
+                if(item.name.includes(value)){
+                  return true
+                }
+              }).map((i, v) =>
                 !i.done && <Task key={i.id} name={i.name} done={i.done} deleteFunc={() => {removeTask(i.id)}} editFunc={() => {showEditBox(i.id, i.name)}} state={i.done ? true : false} checkFunc={() => {checkTask(i.id)}}/>
               )}
             </div>
@@ -104,7 +106,12 @@ function App() {
           <div className="col-4">
             <h4 className="title">Done Tasks</h4>
             <div className="tasks">
-              {tasks.map((i, v) =>
+              {tasks.filter(item => {
+                if(!value) return true
+                if(item.name.includes(value)){
+                  return true
+                }
+              }).map((i, v) =>
                 i.done && <Task key={i.id} name={i.name} done={i.done} deleteFunc={() => {removeTask(i.id)}} editFunc={() => {showEditBox(i.id,i.name)}} state={i.done ? true : false} checkFunc={() => {checkTask(i.id)}} />
               )}
             </div>
