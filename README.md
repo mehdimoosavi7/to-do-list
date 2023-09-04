@@ -26,11 +26,12 @@
   with this to-do-list application you can add a new task , search in tasks, check completed tasks and delete or edit any task.
   this created with react.js and uses props, useState and useEffect hooks
   this consist of 3 components :
-    1. EditBox for show box of edit and add task
-    2. Search for show input of search
-    3. Task for show task boxes
 </p>
-
+<ol>
+  <li>EditBox for show box of edit and add task</li>
+  <li>Search for show input of search</li>
+  <li>Task for show task boxes</li>
+</ol>
 
 ## Connect with me  
 <div align="center">
