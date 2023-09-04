@@ -33,7 +33,7 @@ function App() {
   
   const [value, setValue] = useState('');
 
-  const showEditBox = (id,name) => {
+  const showEditBox = (id) => {
     setEditBoxState({isVisible: true, editId: id});
   };
 
@@ -41,8 +41,7 @@ function App() {
     setEditBoxState({isVisible: false, id: undefined})
   } 
   
-  const addTask = () => {
-    var name = document.getElementById("editTextBox").value;
+  const addTask = (i,name) => {
     var id = tasks.length + 1;
     var done = false;
     setTasks((arr) => [...arr, {id, name, done}]);
