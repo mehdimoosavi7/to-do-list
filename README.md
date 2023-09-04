@@ -4,7 +4,7 @@
 <br/>  
 
 ## Live view
-<a href="https://mehdimoosavi7.github.io/excuse-generator" target="_blank">
+<a href="https://mehdimoosavi7.github.io/to-do-list" target="_blank">
   https://mehdimoosavi7.github.io/to-do-list
 </a>
 
