@@ -77,14 +77,12 @@ function App() {
         <div className='row'>
           <h2 className='to-do-title'>To do list</h2>
         </div>
-        <div className="row">
-          <Editbox Func={tasks.find(t => t.id === editBoxState.editId) ? updateTask : addTask} hideEditBox={hideEditBox} isVisible={editBoxState.isVisible} task={tasks.find(t => t.id === editBoxState.editId) ? tasks[editBoxState.editId-1] : ""}/>
-        </div>
+        <Editbox Func={tasks.find(t => t.id === editBoxState.editId) ? updateTask : addTask} hideEditBox={hideEditBox} isVisible={editBoxState.isVisible} task={tasks.find(t => t.id === editBoxState.editId) ? tasks[editBoxState.editId-1] : ""}/>
         <div className="row content">
           <div className="col-12 col-md-4">
             <div className='sidebar'>
               <Search value={value} func={(e) => setValue(e.target.value)} />
-              <button className="add-btn" id="addButton" onClick={showEditBox}>
+              <button className="add-btn" onClick={showEditBox}>
                 Add a new task
               </button>
             </div>
