@@ -82,7 +82,7 @@ function App() {
           <div className="col-12 col-md-4">
             <div className='sidebar'>
               <Search value={value} func={(e) => setValue(e.target.value)} />
-              <button className="add-btn" onClick={showEditBox}>
+              <button className="add-btn" onClick={showEditBox} data-bs-toggle="modal" data-bs-target="#modal">
                 Add a new task
               </button>
             </div>
@@ -94,6 +94,7 @@ function App() {
                 if(!value || item.name.includes(value)){
                   return true
                 }
+                return undefined
               }).map((i, v) =>
                 !i.done && <Task key={i.id} name={i.name} deleteFunc={() => {removeTask(i.id)}} editFunc={() => {showEditBox(i.id, i.name)}} state={i.done ? true : false} checkFunc={() => {checkTask(i.id)}}/>
               )}
@@ -106,6 +107,7 @@ function App() {
                 if(!value || item.name.includes(value)){
                   return true
                 }
+                return undefined
               }).map((i, v) =>
                 i.done && <Task key={i.id} name={i.name} deleteFunc={() => {removeTask(i.id)}} editFunc={() => {showEditBox(i.id,i.name)}} state={i.done ? true : false} checkFunc={() => {checkTask(i.id)}} />
               )}
