@@ -82,7 +82,7 @@ function App() {
           <div className="col-12 col-md-4">
             <div className='sidebar'>
               <Search value={value} func={(e) => setValue(e.target.value)} />
-              <button className="add-btn" onClick={showEditBox} data-bs-toggle="modal" data-bs-target="#modal">
+              <button className="add-btn" onClick={showEditBox} data-toggle="modal" data-target="#taskModal">
                 Add a new task
               </button>
             </div>

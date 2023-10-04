@@ -90,6 +90,7 @@ code {
   }
 }
 
+
 .editbox-close{
   position: absolute;
   left: 20px;
@@ -218,5 +219,27 @@ button {
   .task {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+.modal{
+  &.show{
+    display: block !important;
+  }
+  .modal-dialog{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  input{
+    width: 100%;
+  }
+  .close{
+    max-width: 30px !important;
+    max-height: 30px !important;
+    border-radius: 50% !important;
+    min-width: unset !important;
   }
 }
